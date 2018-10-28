@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
+import {Dish} from '../models/dish';
 
 @Injectable()
 export class DishService {
-   DISHES = [
+   DISHES: Dish[] = [
     {
       id: '0',
       name: 'Uthappizza',
