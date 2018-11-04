@@ -10,7 +10,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import {MatCheckboxModule, MatFormFieldModule, MatSlideToggleModule, MatToolbarModule} from '@angular/material';
+import {MatCheckboxModule, MatFormFieldModule, MatProgressSpinnerModule, MatSlideToggleModule, MatToolbarModule} from '@angular/material';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import {DishService} from './shared/services/dish.service';
 import { HeaderComponent } from './header/header.component';
@@ -56,7 +56,8 @@ import {MatSelectModule} from '@angular/material';
     FormsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     DishService,
