@@ -1,4 +1,4 @@
-import { Promotion } from './models/promotion';
+import { Promotion } from '../models/promotion';
 
 export const PROMOTIONS: Promotion[] = [
   {

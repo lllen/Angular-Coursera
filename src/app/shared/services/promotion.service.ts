@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Promotion } from '../models/promotion';
-import { PROMOTIONS } from '../promotions';
+import { PROMOTIONS } from '../const/promotions';
 
 @Injectable()
 export class PromotionService {
