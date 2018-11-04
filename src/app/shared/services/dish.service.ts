@@ -3,6 +3,7 @@ import {Dish} from '../models/dish';
 
 @Injectable()
 export class DishService {
+
    DISHES: Dish[] = [
     {
       id: '0',
@@ -174,4 +175,12 @@ export class DishService {
       ]
     }
   ];
+
+  getDish(id: string): Dish {
+    return this.DISHES.filter((dish) => (dish.id === id))[0];
+  }
+
+  getFeaturedDish(): Dish {
+    return this.DISHES.filter((dish) => dish.featured)[0];
+  }
 }
