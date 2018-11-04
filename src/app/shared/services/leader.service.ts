@@ -4,10 +4,10 @@ import {LEADERS} from '../const/leaders';
 @Injectable()
 export class LeaderService {
   getLeaders() {
-    return LEADERS;
+    return Promise.resolve(LEADERS);
   }
 
   getFeaturedLeader() {
-    return this.getLeaders().filter(leader => leader.featured)[0];
+    return Promise.resolve(LEADERS.filter(leader => leader.featured)[0]);
   }
 }

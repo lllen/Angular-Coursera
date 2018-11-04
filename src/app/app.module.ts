@@ -10,7 +10,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material';
+import {MatCheckboxModule, MatFormFieldModule, MatSlideToggleModule, MatToolbarModule} from '@angular/material';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import {DishService} from './shared/services/dish.service';
 import { HeaderComponent } from './header/header.component';
@@ -23,6 +23,9 @@ import {PromotionService} from './shared/services/promotion.service';
 import {LeaderService} from './shared/services/leader.service';
 import { LoginComponent } from './login/login.component';
 import {MatDialogModule} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,14 @@ import {MatDialogModule} from '@angular/material';
     MatCardModule,
     MatButtonModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule
   ],
   providers: [
     DishService,
