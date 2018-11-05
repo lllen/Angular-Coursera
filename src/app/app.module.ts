@@ -26,6 +26,7 @@ import {MatDialogModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material';
+import {MatSliderModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatSelectModule} from '@angular/material';
     MatSelectModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
   providers: [
     DishService,

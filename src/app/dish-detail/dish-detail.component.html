@@ -49,4 +49,28 @@
     </mat-list>
   </div>
 
+  <div class="comments-form" fxFlex="30">
+    <form fxLayout="column"  novalidate [formGroup]="commentsForm" #comemntsForm="ngForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="half-width">
+        <input matInput formControlName="firstName" placeholder="Name">
+      </mat-form-field>
+      <mat-slider
+        class="half-width"
+        [disabled]="disabled"
+        [invert]="invert"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [thumbLabel]="thumbLabel"
+        [tickInterval]="tickInterval"
+        [(ngModel)]="value"
+        [vertical]="vertical">
+      </mat-slider>
+      <mat-form-field class="example-full-width">
+        <textarea formControlName="comment" matInput placeholder="Leave a comment"></textarea>
+      </mat-form-field>
+      <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+    </form>
+  </div>
+
 </div>
