@@ -27,6 +27,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material';
 import {MatSliderModule} from '@angular/material';
+import 'hammerjs';
 
 @NgModule({
   declarations: [

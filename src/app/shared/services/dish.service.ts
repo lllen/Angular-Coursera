@@ -22,4 +22,10 @@ export class DishService {
   getDishesID() {
     return of(DISHES.map(dish => dish.id));
   }
+
+  setCommentToDish(comment, id) {
+    DISHES.forEach(dish => {
+      if (dish.id == id) { dish.comments.push(comment); }
+    });
+  }
 }

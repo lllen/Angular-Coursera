@@ -6,19 +6,13 @@
      fxLayoutGap="10px"
      fxLayoutGap.xs="0">
 
-  <div fxFlex="100">
-    <div>
-      <h3>{{dish.name | uppercase}}</h3>
-      <hr>
-    </div>
-  </div>
 
   <div fxFlex="40">
     <div fxFlex>
-      <mat-card>
+      <mat-card *ngIf="dish">
         <mat-card-header>
           <mat-card-title>
-            <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
+            <h3>{{dish.name | uppercase}}</h3>
           </mat-card-title>
         </mat-card-header>
         <img mat-card-image src="{{dish.image}}" alt={{dish.name}}>
@@ -38,7 +32,7 @@
   </div>
 
   <div fxFlex="40">
-    <mat-list fxFlex>
+    <mat-list fxFlex *ngIf="dish" >
       <h3>Comments</h3>
       <mat-list-item *ngFor="let comment of dish['comments']">
         <p mat-line>Rating: {{comment.rating}}</p>
@@ -53,24 +47,26 @@
     <form fxLayout="column"  novalidate [formGroup]="commentsForm" #comemntsForm="ngForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="half-width">
         <input matInput formControlName="firstName" placeholder="Name">
+        <mat-error *ngIf="formErrors.firstName">{{formErrors.firstName}}</mat-error>
       </mat-form-field>
-      <mat-slider
-        class="half-width"
-        [disabled]="disabled"
-        [invert]="invert"
-        [max]="max"
-        [min]="min"
-        [step]="step"
-        [thumbLabel]="thumbLabel"
-        [tickInterval]="tickInterval"
-        [(ngModel)]="value"
-        [vertical]="vertical">
-      </mat-slider>
       <mat-form-field class="example-full-width">
-        <textarea formControlName="comment" matInput placeholder="Leave a comment"></textarea>
+        <textarea matInput formControlName="comment" placeholder="Leave a comment"></textarea>
+        <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
       </mat-form-field>
-      <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      <p>
+        <mat-slider
+          formControlName="rate"
+          class="half-width"
+          [max]="5"
+          [min]="1"
+          [step]="1"
+          thumbLabel
+          tickInterval>
+        </mat-slider>
+      </p>
+      <button type="submit" [disabled]="commentsForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
     </form>
+
   </div>
 
 </div>
