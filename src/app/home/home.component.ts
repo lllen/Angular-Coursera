@@ -5,7 +5,7 @@ import {DishService} from '../shared/services/dish.service';
 import {PromotionService} from '../shared/services/promotion.service';
 import {Leader} from '../shared/models/leader';
 import {LeaderService} from '../shared/services/leader.service';
-import {flyInOut} from '../animations/app.animation';
+import {expand, flyInOut} from '../animations/app.animation';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,8 @@ import {flyInOut} from '../animations/app.animation';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class HomeComponent implements OnInit {

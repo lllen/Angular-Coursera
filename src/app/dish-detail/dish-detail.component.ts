@@ -5,7 +5,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import { Location } from '@angular/common';
 import {switchMap} from 'rxjs/operators';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {expand, visibility} from '../animations/app.animation';
+import {expand, flyInOut, visibility} from '../animations/app.animation';
 
 @Component({
   selector: 'app-dish-detail',
@@ -18,7 +18,8 @@ import {expand, visibility} from '../animations/app.animation';
   },
   animations: [
     visibility(),
-    expand()
+    expand(),
+    flyInOut()
   ]
 })
 export class DishDetailComponent implements OnInit {
