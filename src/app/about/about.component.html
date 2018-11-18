@@ -57,7 +57,7 @@
   <div fxFlex>
     <h2>Corporate Leadership</h2>
     <div class="info-block-wrapper" fxLayout="row" fxLayoutAlign="start" *ngFor="let leader of leaders">
-      <div class="img-wrapper"><img src="{{leader.image}}"></div>
+      <div class="img-wrapper"><img src="{{ baseURL + leader.image }}" alt={{leader.name}}></div>
       <div class="info">
         <p>{{leader.name}}, {{leader.abbr}}</p>
         <p>{{leader.designation}}</p>

@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Dish} from '../shared/models/dish';
 import {Promotion} from '../shared/models/promotion';
 import {DishService} from '../shared/services/dish.service';
 import {PromotionService} from '../shared/services/promotion.service';
 import {Leader} from '../shared/models/leader';
 import {LeaderService} from '../shared/services/leader.service';
+import {flyInOut} from '../animations/app.animation';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+    flyInOut()
+  ]
 })
 export class HomeComponent implements OnInit {
 
@@ -19,7 +28,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private dishservice: DishService,
               private promotionservice: PromotionService,
-              private leaderservice: LeaderService) { }
+              private leaderservice: LeaderService,
+              @Inject('baseURL') private baseURL) { }
 
   ngOnInit() {
    this.dishservice.getFeaturedDish().subscribe(dish => this.dish = dish);

@@ -27,7 +27,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material';
 import {MatSliderModule} from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
+import {baseURL} from './shared/const/baseurl';
+import {ProcessHTTPMsgService} from './shared/services/ProcessHTTPMsg.service';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import 'hammerjs';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
@@ -60,12 +65,15 @@ import 'hammerjs';
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    ProcessHTTPMsgService,
+    {provide: 'baseURL', useValue: baseURL}
   ],
   entryComponents: [
     LoginComponent
