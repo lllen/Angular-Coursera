@@ -45,9 +45,13 @@ export class DishService {
 
   }
 
-  setCommentToDish(comment, id) {
-    DISHES.forEach(dish => {
-      if (dish.id == id) { dish.comments.push(comment); }
-    });
-  }
+  // setCommentToDish(comment, id) {
+  //   console.log(DISHES);
+  //   DISHES.forEach(dish => {
+  //     if (dish.id == id) {
+  //       dish.comments.push(comment);
+  //     }
+  //   });
+  //   console.log(DISHES);
+  // }
 }

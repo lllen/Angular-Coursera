@@ -1,6 +1,6 @@
 import {Dish} from '../models/dish';
 
-export const DISHES: Dish[] = [
+export const DISHES = [
   {
     id: '0',
     name: 'Uthappizza',

@@ -93,10 +93,9 @@ export class DishDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    this.setComment();
     this.createForm();
 
-    this.dishcopy.comments.push(this.commentsForm.value.comment);
+    this.dishcopy.comments.push(this.loadCommentObject());
     this.dishService.putDish(this.dishcopy)
       .subscribe(dish => {
           this.dish = dish; this.dishcopy = dish;
@@ -134,8 +133,5 @@ export class DishDetailComponent implements OnInit {
     };
   }
 
-  setComment() {
-    this.dishService.setCommentToDish(this.loadCommentObject(), this.dish.id);
-  }
 
 }
