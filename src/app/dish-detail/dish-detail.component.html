@@ -50,15 +50,17 @@
   <div class="comments-form" fxFlex="30">
     <form fxLayout="column"  novalidate [formGroup]="commentsForm" #comemntsForm="ngForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="half-width">
-        <input matInput formControlName="firstName" placeholder="Name">
+        <input matInput name="firstname" formControlName="firstName" placeholder="Name" type="text">
         <mat-error *ngIf="formErrors.firstName">{{formErrors.firstName}}</mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <textarea matInput formControlName="comment" placeholder="Leave a comment"></textarea>
+        <textarea type="text" name="comment" matInput formControlName="comment" placeholder="Leave a comment"></textarea>
         <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
       </mat-form-field>
       <p>
         <mat-slider
+          type="number"
+          name="rate"
           formControlName="rate"
           class="half-width"
           [max]="5"

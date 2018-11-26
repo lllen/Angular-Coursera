@@ -93,15 +93,17 @@ export class DishDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    this.createForm();
+
 
     this.dishcopy.comments.push(this.loadCommentObject());
+    console.log(this.dishcopy);
     this.dishService.putDish(this.dishcopy)
       .subscribe(dish => {
           this.dish = dish; this.dishcopy = dish;
+          console.log(this.dishcopy);
         },
         errmess => { this.dish = null; this.dishcopy = null; this.dishErrMess = <any>errmess; });
-
+    this.createForm();
   }
 
   onValueChanged(data?: any) {
@@ -125,6 +127,10 @@ export class DishDetailComponent implements OnInit {
   }
 
   loadCommentObject() {
+    console.log(this.commentsForm.value['comment']);
+    console.log(this.commentsForm.value['firstName']);
+    console.log(this.commentsForm.value['rate']);
+
     return {
       rating: this.commentsForm.value.rate,
       comment: this.commentsForm.value.comment,
