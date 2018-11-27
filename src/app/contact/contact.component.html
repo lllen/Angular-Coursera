@@ -43,37 +43,41 @@
     <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
       <p>
       <mat-form-field class="half-width">
-        <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
+        <input matInput formControlName="firstname" name="firstname" placeholder="First Name" type="text" required>
         <mat-error *ngIf="formErrors.firstname">{{formErrors.firstname}}</mat-error>
       </mat-form-field>
       <mat-form-field class="half-width">
-        <input matInput formControlName="lastname" placeholder="Last Name" type="text" required>
+        <input matInput formControlName="lastname" name="lastname" placeholder="Last Name" type="text" required>
         <mat-error *ngIf="formErrors.lastname">{{formErrors.lastname}}</mat-error>
       </mat-form-field>
       </p>
       <p>
         <mat-form-field class="half-width">
-          <input matInput formControlName="telnum" placeholder="Tel. Number" type="tel" pattern="[0-9]*" required>
+          <input matInput formControlName="telnum" name="telnum" placeholder="Tel. Number" type="tel" pattern="[0-9]*" required>
           <mat-error *ngIf="formErrors.telnum">{{formErrors.telnum}}</mat-error>
         </mat-form-field>
         <mat-form-field class="half-width">
           <input matInput formControlName="email" placeholder="Email" type="email" email required>
           <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
-        </mat-form-field>
+        </mat-form-field>=
+        <mat-slide-toggle
+          formControlName="agree"
+          name="agree"
+          class="example-margin"
+          [checked]="checked">
+          May we contact you?
+        </mat-slide-toggle>
         <mat-form-field>
-          <mat-slide-toggle
-            class="example-margin"
-            [checked]="checked"
-            May we contact you?>
-          </mat-slide-toggle>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="Panel color" [formControl]="panelColor"
-                      panelClass="example-panel-{{panelColor.value}}">
-            <mat-option value="red">Red</mat-option>
-            <mat-option value="green">Green</mat-option>
-            <mat-option value="blue">Blue</mat-option>
+          <mat-select formControlName="contacttype" name="contacttype">
+            <mat-option value="tel">Telephone</mat-option>
+            <mat-option class="email">Email</mat-option>
           </mat-select>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <textarea type="text" name="message" matInput formControlName="message" placeholder="Write your message"></textarea>
+          <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
         </mat-form-field>
       </p>
       <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
