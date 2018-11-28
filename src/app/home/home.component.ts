@@ -23,6 +23,7 @@ import {expand, flyInOut} from '../animations/app.animation';
 })
 export class HomeComponent implements OnInit {
 
+  activeSpinner = false;
   leader: Leader;
   dish: Dish;
   promotion: Promotion;
@@ -36,12 +37,14 @@ export class HomeComponent implements OnInit {
               @Inject('baseURL') private baseURL) { }
 
   ngOnInit() {
+    this.activeSpinner = true;
    this.dishservice.getFeaturedDish().subscribe(dish => this.dish = dish,
                                                 error => { this.dishErrMess = error; });
    this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion,
                                                           error => { this.promErrMess = error; });
    this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader,
-                                                      error => {this.leaderErrMess = error; });
+                                                    error => {this.leaderErrMess = error; },
+                                                    () => {this.activeSpinner = false; });
   }
 
 }

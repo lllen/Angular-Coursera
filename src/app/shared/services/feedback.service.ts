@@ -11,13 +11,13 @@ export class FeedbackService {
     constructor(private http: HttpClient,
                 private processHTTPMsgService: ProcessHTTPMsgService) { }
 
-     putFeedback(feedback: Feedback): Observable<Feedback> {
+     putFeedback(feedback: Feedback) {
          const httpOptions = {
              headers: new HttpHeaders({
                  'Content-Type':  'application/json'
              })
          };
-        return this.http.put<Feedback>(`${baseURL}/feedback`, feedback, httpOptions)
+        return this.http.post(`${baseURL}feedback`, feedback, httpOptions)
             .pipe(catchError(this.processHTTPMsgService.handleError));
      }
 }

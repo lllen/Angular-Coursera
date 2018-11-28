@@ -22,13 +22,16 @@ import {FeedbackService} from '../shared/services/feedback.service';
 export class ContactComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
-  feedbackCopy: Feedback;
+  feedbackCopy;
+  activeSpinner = false;
+  activeFeedbackPreview = false;
   contactType = ContactType;
   formErrors = {
       'firstName': '',
       'lastName': '',
       'telNum': '',
-      'email': ''
+      'email': '',
+      'message': ''
   };
 
   validationMessages = {
@@ -50,6 +53,10 @@ export class ContactComponent implements OnInit {
           'required':      'Email is required.',
           'email':         'Email not in valid format.'
       },
+      'message': {
+        'required':         'Feedback is required',
+        'minlength':        'Feedback is too short.'
+      }
   };
 
   constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {}
@@ -58,7 +65,7 @@ export class ContactComponent implements OnInit {
     this.createForm();
   }
 
-  createForm() {
+  createForm(): any {
       this.feedbackForm = this.fb.group({
           firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
           lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
@@ -66,7 +73,7 @@ export class ContactComponent implements OnInit {
           email: ['', [Validators.required, Validators.email] ],
           agree: false,
           contactType: 'None',
-          message: ''
+          message: ['', [Validators.required, Validators.minLength(10)]]
       });
 
       this.feedbackForm.valueChanges
@@ -75,7 +82,7 @@ export class ContactComponent implements OnInit {
       this.onValueChanged(); // (re)set validation messages now
   }
 
-  onValueChanged(data?: any) {
+  onValueChanged(data?: any): any {
       if (!this.feedbackForm) { return; }
       const form = this.feedbackForm;
       for (const field in this.formErrors) {
@@ -96,34 +103,26 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.feedbackService.putFeedback(this.feedbackForm.value).subscribe(data => {
-        this.feedbackCopy = data; },
-        errmess => { console.log(<any>errmess); });
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
-    this.feedbackForm.reset({
-      firstName: '',
-      lastName: '',
-      telNum: '',
-      email: '',
-      agree: false,
-      contactType: 'None',
-      message: ''
+    this.activeSpinner = true;
+    this.feedbackService.putFeedback(this.feedbackForm.value)
+      .subscribe(data => {
+        this.feedbackCopy = data;
+     },
+        errmess => {
+      console.log(<any>errmess);
+    }, () => {
+        this.activeSpinner = false;
+        this.handleFeedbackPreview();
     });
-   // this.feedbackForm.resetForm();
+    this.createForm();
   }
 
-  loadFeedbackOj() {
-      return {
-          firstName: this.feedbackForm.value.firstName,
-          lastName: this.feedbackForm.value.lastName,
-          telNum: this.feedbackForm.value.telNum,
-          email: this.feedbackForm.value.email,
-          agree: this.feedbackForm.value.agree,
-          contactType: this.feedbackForm.value.contactType,
-          message: this.feedbackForm.value.message
-      };
-    }
+  handleFeedbackPreview() {
+    this.activeFeedbackPreview = true;
+    setTimeout(() => {
+      this.activeFeedbackPreview = false;
+    }, 5000);
+  }
 
 }
 

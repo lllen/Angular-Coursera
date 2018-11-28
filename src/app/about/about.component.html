@@ -65,6 +65,10 @@
       </div>
     </div>
   </div>
+  <div *ngIf="activeSpinner">
+    <mat-spinner [hidden]="leaders"></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+
 </div>
 
 <div fxFlex *ngIf="leaderErrMess">

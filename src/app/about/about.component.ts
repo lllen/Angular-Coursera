@@ -18,7 +18,7 @@ import {expand, flyInOut} from '../animations/app.animation';
   ]
 })
 export class AboutComponent implements OnInit {
-
+  activeSpinner = false;
   leaders: Leader[];
   leaderErrMess: string;
 
@@ -26,9 +26,11 @@ export class AboutComponent implements OnInit {
               @Inject('baseURL')  private baseURL) { }
 
   ngOnInit() {
+    this.activeSpinner = true;
     this.leaderService.getLeaders()
       .subscribe(leaders => this.leaders = leaders,
-                  error => this.leaderErrMess = error);
+                  error => this.leaderErrMess = error,
+                  () => { this.activeSpinner = false; });
   }
 
 
