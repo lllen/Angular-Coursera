@@ -32,6 +32,7 @@ import 'hammerjs';
 import {baseURL} from './shared/const/baseurl';
 import {ProcessHTTPMsgService} from './shared/services/ProcessHTTPMsg.service';
 import { HighlightDirective } from './directives/highlight.directive';
+import {FeedbackService} from './shared/services/feedback.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     PromotionService,
     LeaderService,
     ProcessHTTPMsgService,
+    FeedbackService,
     {provide: 'baseURL', useValue: baseURL}
   ],
   entryComponents: [

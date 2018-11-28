@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactType, Feedback} from '../shared/models/feedback';
 import {expand, flyInOut} from '../animations/app.animation';
+import {FeedbackService} from '../shared/services/feedback.service';
 
 
 @Component({
@@ -21,26 +22,27 @@ import {expand, flyInOut} from '../animations/app.animation';
 export class ContactComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackCopy: Feedback;
   contactType = ContactType;
   formErrors = {
-      'firstname': '',
-      'lastname': '',
-      'telnum': '',
+      'firstName': '',
+      'lastName': '',
+      'telNum': '',
       'email': ''
   };
 
   validationMessages = {
-      'firstname': {
+      'firstName': {
           'required':      'First Name is required.',
           'minlength':     'First Name must be at least 2 characters long.',
           'maxlength':     'FirstName cannot be more than 25 characters long.'
       },
-      'lastname': {
+      'lastName': {
           'required':      'Last Name is required.',
           'minlength':     'Last Name must be at least 2 characters long.',
           'maxlength':     'Last Name cannot be more than 25 characters long.'
       },
-      'telnum': {
+      'telNum': {
           'required':      'Tel. number is required.',
           'pattern':       'Tel. number must contain only numbers.'
       },
@@ -50,7 +52,7 @@ export class ContactComponent implements OnInit {
       },
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {}
 
   ngOnInit() {
     this.createForm();
@@ -58,12 +60,12 @@ export class ContactComponent implements OnInit {
 
   createForm() {
       this.feedbackForm = this.fb.group({
-          firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-          lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-          telnum: ['', [Validators.required, Validators.pattern] ],
+          firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
+          lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
+          telNum: ['', [Validators.required, Validators.pattern] ],
           email: ['', [Validators.required, Validators.email] ],
           agree: false,
-          contacttype: 'None',
+          contactType: 'None',
           message: ''
       });
 
@@ -94,19 +96,34 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.feedbackService.putFeedback(this.feedbackForm.value).subscribe(data => {
+        this.feedbackCopy = data; },
+        errmess => { console.log(<any>errmess); });
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
     this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '',
+      firstName: '',
+      lastName: '',
+      telNum: '',
       email: '',
       agree: false,
-      contacttype: 'None',
+      contactType: 'None',
       message: ''
     });
    // this.feedbackForm.resetForm();
   }
+
+  loadFeedbackOj() {
+      return {
+          firstName: this.feedbackForm.value.firstName,
+          lastName: this.feedbackForm.value.lastName,
+          telNum: this.feedbackForm.value.telNum,
+          email: this.feedbackForm.value.email,
+          agree: this.feedbackForm.value.agree,
+          contactType: this.feedbackForm.value.contactType,
+          message: this.feedbackForm.value.message
+      };
+    }
 
 }
 
